@@ -1,0 +1,10 @@
+01/02/2023
+
+- Criado o banco de dados
+- Criada a aplicação no netbeans
+
+**********
+02/02/2023
+
+- Criada a tela de login e tela principal
+- Criadas funções para essas duas telas. 
