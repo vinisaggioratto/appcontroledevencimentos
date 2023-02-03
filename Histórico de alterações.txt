@@ -8,3 +8,5 @@
 
 - Criada a tela de login e tela principal
 - Criadas funções para essas duas telas. 
+- Criada função para codificar senhas para comparação no login.
+DIA DE GRANDE APRENDIZADO.

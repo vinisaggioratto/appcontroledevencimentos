@@ -9,11 +9,9 @@ import br.com.vinicius.appcontrolevencimento.utilities.StatusServidor;
 import br.com.vinicius.appcontrolevencimento.utilities.ValidarUsuario;
 import br.com.vinicius.appcontrolevencimentos.connection.ModuloConexao;
 import br.com.vinicius.appcontrolevencimentos.view.TelaPrincipal;
-import static br.com.vinicius.appcontrolevencimentos.view.TelaPrincipal.labelUsuarioLogado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**

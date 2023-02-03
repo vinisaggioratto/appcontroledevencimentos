@@ -20,25 +20,31 @@ public class ValidarUsuario {
     PreparedStatement pst = null;
     ResultSet rs = null;
     boolean valido;
+    String senhaCriptoInformada;
+    String senhaCriptoRecuperada;
+    String nomeRecuperado;
+    String senhaRecuperada;
 
     public boolean validarUsuario(String usuario, String senha) {
-
+        CriptografarSenha criptoSenha = new CriptografarSenha();  //new CriptografarSenha()
         conexao = ModuloConexao.conector();
         String sql = "select * from usuario where usuario = ? and senha = ?";
 
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, usuario);
-            String senha1 = new String(senha);
-            pst.setString(2, senha1);
+            //String senha1 = new String(senha);
+            pst.setString(2, senha);
 
             rs = pst.executeQuery();
-
+            
             if (rs.next()) {
-                String nomeRecuperado = rs.getString("usuario");
-                String senhaRecuperada = rs.getString("senha");
+                nomeRecuperado = rs.getString("usuario");
+                senhaRecuperada = rs.getString("senha");
+                senhaCriptoRecuperada = criptoSenha.criptografarSenha(senhaRecuperada);
+                senhaCriptoInformada = criptoSenha.criptografarSenha(senha);
 
-                if (nomeRecuperado.equals(usuario) && senhaRecuperada.equals(senha)) {
+                if (nomeRecuperado.equals(usuario) && senhaCriptoRecuperada.equals(senhaCriptoInformada)) {  //IgnoreCase
                     valido = true;
 
                 } else {
@@ -48,7 +54,8 @@ public class ValidarUsuario {
                 }
                 return valido;
             } else {
-                JOptionPane.showMessageDialog(null, "Usuário não encontrado.");
+
+                JOptionPane.showMessageDialog(null, "Usuário/Senha inválidos.");
                 conexao.close();
                 return valido;
             }
