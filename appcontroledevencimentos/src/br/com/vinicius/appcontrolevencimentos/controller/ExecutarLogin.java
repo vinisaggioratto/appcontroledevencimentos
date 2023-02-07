@@ -4,10 +4,11 @@
  */
 package br.com.vinicius.appcontrolevencimentos.controller;
 
-import br.com.vinicius.appcontrolevencimento.utilities.UsuarioAtivo;
-import br.com.vinicius.appcontrolevencimento.utilities.StatusServidor;
-import br.com.vinicius.appcontrolevencimento.utilities.ValidarUsuario;
+import br.com.vinicius.appcontrolevencimentos.utilities.UsuarioAtivo;
+import br.com.vinicius.appcontrolevencimentos.utilities.StatusServidor;
+import br.com.vinicius.appcontrolevencimentos.utilities.ValidarUsuario;
 import br.com.vinicius.appcontrolevencimentos.connection.ModuloConexao;
+import br.com.vinicius.appcontrolevencimentos.view.TelaLogin;
 import br.com.vinicius.appcontrolevencimentos.view.TelaPrincipal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,7 @@ public class ExecutarLogin {
     TelaPrincipal telaPrincipal = new TelaPrincipal();
     UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
     ValidarUsuario validarUsuario = new ValidarUsuario();
+    
 
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -39,6 +41,7 @@ public class ExecutarLogin {
                 telaPrincipal.setVisible(true);
                 statusServidor.checarStatusServidorTelaPrincipal();
                 telaPrincipal.labelUsuarioLogado.setText(usuarioAtivo.getUsuarioAtivoLogin());
+                
                 conexao.close();
             }
 
