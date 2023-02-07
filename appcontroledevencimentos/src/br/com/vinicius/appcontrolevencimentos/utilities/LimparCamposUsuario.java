@@ -21,6 +21,7 @@ public class LimparCamposUsuario {
         telaUsuario.txtUsuario.setText(null);
         telaUsuario.txtSenha.setText(null);
         telaUsuario.cboAtivo.setSelectedItem("Sim");
+        telaUsuario.cboPerfil.setSelectedItem("Gestor");
         ((DefaultTableModel) tblCadastroUsuario.getModel()).setRowCount(0);
         telaUsuario.lblBotaoSalvar.setEnabled(true);
 

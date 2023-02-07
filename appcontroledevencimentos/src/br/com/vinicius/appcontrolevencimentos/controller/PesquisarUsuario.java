@@ -29,8 +29,11 @@ public class PesquisarUsuario {
     public void pesquisarUsuario() {
         conexao = ModuloConexao.conector();
 
-        String sql = "select id as Id, usuario as Usuario, senha as Senha, ativo as Ativo"
-                + " from usuario where usuario like ?";
+        String sql = "select us.id as ID, us.usuario as Usuario, us.senha as Senha, "
+                + "pf.nome as Perfil, us.ativo as Ativo from usuario us "
+                + "join perfil pf on us.perfil_id = pf.id where usuario like ?";
+//        String sql = "select id as Id, usuario as Usuario, senha as Senha, perfil_id as Perfil,"
+//                + " ativo as Ativo from usuario where usuario like ?";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -49,19 +52,18 @@ public class PesquisarUsuario {
     //MÉTODO PARA SETAR OS CAMPOS DO FORMULARIO COM O CONTEUDO DA TABELA
     public void setarCampos() {
 
-            int setar = tblCadastroUsuario.getSelectedRow(); //a variavel recebe os valores da linha da tabela
-            telaUsuario.txtIdUsuario.setText(tblCadastroUsuario.getModel().getValueAt(setar, 0).toString());
-            telaUsuario.txtUsuario.setText(tblCadastroUsuario.getModel().getValueAt(setar, 1).toString());
-            telaUsuario.txtSenha.setText(tblCadastroUsuario.getModel().getValueAt(setar, 2).toString());
-            telaUsuario.cboAtivo.setSelectedItem(tblCadastroUsuario.getModel().getValueAt(setar, 3).toString());
+        int setar = tblCadastroUsuario.getSelectedRow(); //a variavel recebe os valores da linha da tabela
+        telaUsuario.txtIdUsuario.setText(tblCadastroUsuario.getModel().getValueAt(setar, 0).toString());
+        telaUsuario.txtUsuario.setText(tblCadastroUsuario.getModel().getValueAt(setar, 1).toString());
+        telaUsuario.txtSenha.setText(tblCadastroUsuario.getModel().getValueAt(setar, 2).toString());
+        telaUsuario.cboPerfil.setSelectedItem(tblCadastroUsuario.getModel().getValueAt(setar, 3).toString());
+        telaUsuario.cboAtivo.setSelectedItem(tblCadastroUsuario.getModel().getValueAt(setar, 4).toString());
 
-            //A LINHA ABAIXO DESABILITA O BOTAO DE ADICIONAR CLIENTES
-            //telaUsuario.lblBotaoSalvar.setEnabled(false);
-            
-            if (telaUsuario.cboAtivo.getSelectedItem().equals("Não")) {
+        if (telaUsuario.cboAtivo.getSelectedItem().equals("Não")) {
             telaUsuario.txtIdUsuario.setEnabled(false);
             telaUsuario.txtUsuario.setEnabled(false);
             telaUsuario.txtSenha.setEnabled(false);
-            }
+            telaUsuario.cboPerfil.setEnabled(false);
+        }
     }
 }

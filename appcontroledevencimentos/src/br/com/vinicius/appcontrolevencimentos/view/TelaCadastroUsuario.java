@@ -61,6 +61,8 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
         txtSenha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         cboAtivo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cboPerfil = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("Cadastrar Usuário");
@@ -145,13 +147,13 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         tblCadastroUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Usuário", "Senha", "Ativo"
+                "ID", "Usuário", "Senha", "Perfil", "Ativo"
             }
         ));
         tblCadastroUsuario.setShowGrid(true);
@@ -175,6 +177,10 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         cboAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
 
+        jLabel5.setText("Perfil:");
+
+        cboPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gestor", "Operacional I", "Operacional II" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,14 +201,18 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                                     .addComponent(txtSenha)
-                                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 232, Short.MAX_VALUE)))
+                                    .addComponent(cboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(28, 28, 28)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -230,12 +240,16 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(cboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 627, 481);
+        setBounds(0, 0, 627, 502);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPesquisarUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarUsuarioKeyReleased
@@ -281,11 +295,13 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JComboBox<String> cboAtivo;
+    public static javax.swing.JComboBox<String> cboPerfil;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lblBotaoCancelar;

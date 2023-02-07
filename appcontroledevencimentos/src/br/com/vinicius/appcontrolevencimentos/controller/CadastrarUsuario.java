@@ -33,11 +33,13 @@ public class CadastrarUsuario {
 
             pst.setString(1, telaUsuario.txtUsuario.getText());
             pst.setString(2, telaUsuario.txtSenha.getText());
-            pst.setString(3, telaUsuario.cboAtivo.getSelectedItem().toString());
+            pst.setString(3, telaUsuario.cboPerfil.getSelectedItem().toString());
+            pst.setString(4, telaUsuario.cboAtivo.getSelectedItem().toString());
 
-            if ((telaUsuario.txtUsuario.getText().isEmpty()
-                    || telaUsuario.txtSenha.getText().isEmpty()
-                    || telaUsuario.cboAtivo.getSelectedItem().toString().isEmpty())) {
+            if ((telaUsuario.txtUsuario.getText().isEmpty())
+                    || (telaUsuario.txtSenha.getText().isEmpty())
+                    || (telaUsuario.cboAtivo.getSelectedItem().toString().isEmpty())
+                    || (telaUsuario.cboPerfil.getSelectedItem().toString().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
             } else {
                 int adicionado = pst.executeUpdate();
