@@ -10,3 +10,16 @@
 - Criadas funções para essas duas telas. 
 - Criada função para codificar senhas para comparação no login.
 DIA DE GRANDE APRENDIZADO.
+
+**********
+03/02/2023
+
+- Criada tela de cadastro e consulta de usuarios
+- Criadas funções novas
+
+**********
+06/02/2023
+
+- Alteradas tabelas do banco de dados, colocado o usuario_id nas tabelas que registram
+as alterações de documentos e licenças.
+

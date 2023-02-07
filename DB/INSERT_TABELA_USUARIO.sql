@@ -1,5 +1,7 @@
-use app_controle_vencimentos;
+USE app_controle_vencimentos;
 SELECT * FROM app_controle_vencimentos.usuario;
 
-insert into usuario values
-(DEFAULT,'admin','admin','Sim');
+insert into usuario
+values
+(DEFAULT, 'admin','admin',1,'Sim'),
+(DEFAULT, 'vinicius','1234',2,'Sim');
