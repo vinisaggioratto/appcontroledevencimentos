@@ -8,6 +8,7 @@ import br.com.vinicius.appcontrolevencimentos.utilities.FecharSistema;
 import br.com.vinicius.appcontrolevencimentos.controller.ExecutarLogin;
 import br.com.vinicius.appcontrolevencimentos.utilities.StatusServidor;
 import java.sql.*;
+import javax.swing.JFrame;
 
 
 /**
@@ -62,7 +63,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setResizable(false);
 
@@ -262,6 +263,7 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         login.logarSistema(txtUsuario.getText(), txtSenha.getText());
+        this.dispose();
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 

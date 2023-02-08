@@ -4,6 +4,7 @@
  */
 package br.com.vinicius.appcontrolevencimentos.utilities;
 
+import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroEmissor;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroPerfil;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroUsuario;
 import static br.com.vinicius.appcontrolevencimentos.view.TelaCadastroUsuario.tblCadastroUsuario;
@@ -17,6 +18,7 @@ public class LimparCampos {
 
     TelaCadastroUsuario telaUsuario = null;
     TelaCadastroPerfil telaPerfil = null;
+    TelaCadastroEmissor telaEmissor = null;
     
 
     public void limparCamposUsuario() {
@@ -38,4 +40,8 @@ public class LimparCampos {
         telaPerfil.txtDescricao.setText(null);
     }
 
+    public void limparCamposEmissor(){
+        telaEmissor.txtIdEmissor.setText(null);
+        telaEmissor.txtEmissor.setText(null);
+    }
 }

@@ -18,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaCadastroUsuario telaCadUsuario = new TelaCadastroUsuario();
     UsuariosOnline usuarioOnline = new UsuariosOnline();
     TelaCadastroPerfil telaPerfil = new TelaCadastroPerfil();
+    TelaCadastroEmissor telaEmissor = new TelaCadastroEmissor();
     /**
      * Creates new form TelaPrincipal
      */
@@ -51,7 +52,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         labelUsuarioLogado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuCadastroEmissor = new javax.swing.JMenuItem();
         menuCadastroDocumento = new javax.swing.JMenuItem();
         menuCadastroLicenca = new javax.swing.JMenuItem();
         menuCadastroVeiculo = new javax.swing.JMenuItem();
@@ -116,27 +117,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btnAtualizar)
-                        .addGap(0, 43, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(btnAtualizar)
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -173,14 +171,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros.setText("Cadastros");
         menuCadastros.setName(""); // NOI18N
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem5.setText("Emissor");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastroEmissor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menuCadastroEmissor.setText("Emissor");
+        menuCadastroEmissor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuCadastroEmissorActionPerformed(evt);
             }
         });
-        menuCadastros.add(jMenuItem5);
+        menuCadastros.add(menuCadastroEmissor);
 
         menuCadastroDocumento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuCadastroDocumento.setText("Documento");
@@ -361,9 +359,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         usuarioOnline.usuarioOnline();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menuCadastroEmissorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroEmissorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+        telaEmissor.setVisible(true);
+        desktopPanel.add(telaEmissor);
+        telaEmissor.setPosicao();
+    }//GEN-LAST:event_menuCadastroEmissorActionPerformed
 
     private void menuCadastroPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroPerfilActionPerformed
         // TODO add your handling code here:
@@ -417,7 +418,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -426,6 +426,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelTituloStatusDB;
     public static javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JMenuItem menuCadastroDocumento;
+    private javax.swing.JMenuItem menuCadastroEmissor;
     private javax.swing.JMenuItem menuCadastroLicenca;
     private javax.swing.JMenuItem menuCadastroMotorista;
     private javax.swing.JMenuItem menuCadastroPerfil;

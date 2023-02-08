@@ -39,3 +39,4 @@ com o login/fechamento do sistema.
 - Alterado método para salvar os dados do usuario
 - Adicionados novos itens ao menu
 - Alterados nomes de alguns métodos
+- Inserido comando para fechar a tela de login após ser acessada a tela principal.

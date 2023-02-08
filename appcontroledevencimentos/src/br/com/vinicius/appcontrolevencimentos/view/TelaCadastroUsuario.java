@@ -5,10 +5,8 @@
 package br.com.vinicius.appcontrolevencimentos.view;
 
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
-import br.com.vinicius.appcontrolevencimentos.controller.CadastrarUsuario;
-import br.com.vinicius.appcontrolevencimentos.controller.EditarUsuario;
-import br.com.vinicius.appcontrolevencimentos.controller.ExcluirUsuario;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarUsuario;
+import br.com.vinicius.appcontrolevencimentos.controller.CrudUsuario;
+import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarUsuario;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -18,11 +16,9 @@ import java.sql.Connection;
  */
 public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
-    PesquisarUsuario pesquisar = new PesquisarUsuario();
-    EditarUsuario editarUsuario = new EditarUsuario();
-    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario();
+    PesquisarSetarUsuario pesquisar = new PesquisarSetarUsuario();
+    CrudUsuario crudUsuario = new CrudUsuario();
     LimparCampos limpaCampos = new LimparCampos();
-    ExcluirUsuario excluirUsuario = new ExcluirUsuario();
     Connection conexao = null;
 
     /**
@@ -73,7 +69,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         lblBotaoNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/adicionar-ficheiro.png"))); // NOI18N
         lblBotaoNovo.setToolTipText("Novo");
-        lblBotaoNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblBotaoNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBotaoNovo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoNovoMouseClicked(evt);
@@ -82,7 +78,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         lblBotaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/salve-.png"))); // NOI18N
         lblBotaoSalvar.setToolTipText("Salvar");
-        lblBotaoSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblBotaoSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBotaoSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoSalvarMouseClicked(evt);
@@ -91,7 +87,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         lblBotaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/cancelar.png"))); // NOI18N
         lblBotaoCancelar.setToolTipText("Cancelar");
-        lblBotaoCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblBotaoCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBotaoCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoCancelarMouseClicked(evt);
@@ -100,7 +96,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
         lblBotaoExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/bin.png"))); // NOI18N
         lblBotaoExcluir.setToolTipText("Excluir");
-        lblBotaoExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblBotaoExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBotaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoExcluirMouseClicked(evt);
@@ -209,12 +205,9 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                                     .addComponent(txtSenha)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                                    .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -278,9 +271,9 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
         if(txtIdUsuario.getText().isEmpty()){
-            cadastrarUsuario.cadastrarUsuario();   
+            crudUsuario.cadastrarUsuario();   
         }else{
-            editarUsuario.editarUsuario();
+            crudUsuario.editarUsuario();
         }
         
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -292,7 +285,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        excluirUsuario.excluirUsuario();
+        crudUsuario.excluirUsuario();
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
 

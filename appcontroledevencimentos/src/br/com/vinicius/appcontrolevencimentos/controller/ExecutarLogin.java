@@ -43,6 +43,7 @@ public class ExecutarLogin {
                 telaPrincipal.labelUsuarioLogado.setText(usuarioAtivo.getUsuarioAtivoLogin());
                 usuarioOnline.alterarStatusOnline(usuarioOnline.buscarIdUsuario(usuario));
                 telaPrincipal.setVisible(true);
+                
                 conexao.close();
             }
 

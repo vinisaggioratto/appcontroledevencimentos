@@ -18,7 +18,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author FROTA01-PC
  */
-public class PesquisarUsuario {
+public class PesquisarSetarUsuario {
 
     TelaCadastroUsuario telaUsuario = null;
     Connection conexao = null;
