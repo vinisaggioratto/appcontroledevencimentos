@@ -4,25 +4,29 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
+import br.com.vinicius.appcontrolevencimentos.utilities.UsuariosOnline;
 import br.com.vinicius.appcontrolevencimentos.utilities.FecharSistema;
 import javax.swing.JFrame;
+
 
 /**
  *
  * @author FROTA01-PC
  */
 public class TelaPrincipal extends javax.swing.JFrame {
+
     TelaCadastroUsuario telaCadUsuario = new TelaCadastroUsuario();
-
-
+    UsuariosOnline usuarioOnline = new UsuariosOnline();
+    TelaCadastroPerfil telaPerfil = new TelaCadastroPerfil();
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
+
         initComponents();
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
     }
 
     /**
@@ -35,6 +39,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPanel = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUsuariosOnline = new javax.swing.JTable();
+        btnAtualizar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         labelTituloStatusDB = new javax.swing.JLabel();
         labelStatusDB = new javax.swing.JLabel();
@@ -42,12 +51,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         labelUsuarioLogado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         menuCadastroDocumento = new javax.swing.JMenuItem();
         menuCadastroLicenca = new javax.swing.JMenuItem();
         menuCadastroVeiculo = new javax.swing.JMenuItem();
         menuCadastroMotorista = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuCadastroUsuario = new javax.swing.JMenuItem();
+        menuCadastroPerfil = new javax.swing.JMenuItem();
         menuDocumentos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -62,16 +73,91 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Controle de Vencimentos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Usuários online:");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tblUsuariosOnline.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Usuário"
+            }
+        ));
+        tblUsuariosOnline.setToolTipText("Usuários Online");
+        tblUsuariosOnline.setShowGrid(true);
+        jScrollPane1.setViewportView(tblUsuariosOnline);
+
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnAtualizar)
+                        .addGap(0, 43, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAtualizar)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        desktopPanel.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout desktopPanelLayout = new javax.swing.GroupLayout(desktopPanel);
         desktopPanel.setLayout(desktopPanelLayout);
         desktopPanelLayout.setHorizontalGroup(
             desktopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         desktopPanelLayout.setVerticalGroup(
             desktopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
+            .addGroup(desktopPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -86,6 +172,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuCadastros.setText("Cadastros");
         menuCadastros.setName(""); // NOI18N
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem5.setText("Emissor");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(jMenuItem5);
 
         menuCadastroDocumento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuCadastroDocumento.setText("Documento");
@@ -122,6 +217,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastros.add(menuCadastroUsuario);
+
+        menuCadastroPerfil.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menuCadastroPerfil.setText("Perfil");
+        menuCadastroPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroPerfilActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(menuCadastroPerfil);
 
         jMenuBar1.add(menuCadastros);
 
@@ -223,8 +327,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCadastroLicencaActionPerformed
 
     private void menuSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairSairActionPerformed
-        // TODO add your handling code here:
+        // //Ao fechar o sistema, altera o status do usuario
         FecharSistema fechar = new FecharSistema();
+        String usuario = labelUsuarioLogado.getText();
+        usuarioOnline.alterarStatusOffline(usuarioOnline.buscarIdUsuario(usuario));
         fechar.closeSystem();
     }//GEN-LAST:event_menuSairSairActionPerformed
 
@@ -235,6 +341,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaCadUsuario.setPosicao();
 
     }//GEN-LAST:event_menuCadastroUsuarioActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Ao fechar o sistema, altera o status do usuario:
+        String usuario = labelUsuarioLogado.getText();
+        usuarioOnline.alterarStatusOffline(usuarioOnline.buscarIdUsuario(usuario));
+        System.exit(0);
+
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        // TODO add your handling code here:
+
+        usuarioOnline.usuarioOnline();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void menuCadastroPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroPerfilActionPerformed
+        // TODO add your handling code here:
+        telaPerfil.setVisible(true);
+        desktopPanel.add(telaPerfil);
+        telaPerfil.setPosicao();
+        
+    }//GEN-LAST:event_menuCadastroPerfilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,12 +409,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane desktopPanel;
+    private javax.swing.JButton btnAtualizar;
+    public static javax.swing.JDesktopPane desktopPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     public static javax.swing.JLabel labelStatusDB;
@@ -286,6 +428,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadastroDocumento;
     private javax.swing.JMenuItem menuCadastroLicenca;
     private javax.swing.JMenuItem menuCadastroMotorista;
+    private javax.swing.JMenuItem menuCadastroPerfil;
     private javax.swing.JMenuItem menuCadastroUsuario;
     private javax.swing.JMenuItem menuCadastroVeiculo;
     private javax.swing.JMenu menuCadastros;
@@ -297,5 +440,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenuItem menuSairSair;
+    public static javax.swing.JTable tblUsuariosOnline;
     // End of variables declaration//GEN-END:variables
 }

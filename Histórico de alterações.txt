@@ -22,4 +22,13 @@ DIA DE GRANDE APRENDIZADO.
 
 - Alteradas tabelas do banco de dados, colocado o usuario_id nas tabelas que registram
 as alterações de documentos e licenças.
+- Criada tela para alteração de endereço e porta do servidor na tela de login.
 
+**********
+07/02/2023
+- Criado método para mostrar os usuarios ativos
+- Criado método para alterar o status do usuario no banco de dados, de acordo
+com o login/fechamento do sistema.
+- Alterado método para salvar os dados do usuario
+- Adicionados novos itens ao menu
+- Alterados nomes de alguns métodos

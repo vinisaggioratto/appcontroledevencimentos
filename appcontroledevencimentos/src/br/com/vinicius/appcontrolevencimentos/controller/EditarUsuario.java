@@ -4,7 +4,7 @@
  */
 package br.com.vinicius.appcontrolevencimentos.controller;
 
-import br.com.vinicius.appcontrolevencimentos.utilities.LimparCamposUsuario;
+import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
 import br.com.vinicius.appcontrolevencimentos.connection.ModuloConexao;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroUsuario;
 import java.sql.*;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class EditarUsuario {
 
     TelaCadastroUsuario telaUsuario = null;
-    LimparCamposUsuario limpaCampos = new LimparCamposUsuario();
+    LimparCampos limpaCampos = new LimparCampos();
     
     Connection conexao = null;
     PreparedStatement pst = null;

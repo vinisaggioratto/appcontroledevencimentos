@@ -4,6 +4,7 @@
  */
 package br.com.vinicius.appcontrolevencimentos.utilities;
 
+import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroPerfil;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroUsuario;
 import static br.com.vinicius.appcontrolevencimentos.view.TelaCadastroUsuario.tblCadastroUsuario;
 import javax.swing.table.DefaultTableModel;
@@ -12,22 +13,29 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author FROTA01-PC
  */
-public class LimparCamposUsuario {
+public class LimparCampos {
 
     TelaCadastroUsuario telaUsuario = null;
+    TelaCadastroPerfil telaPerfil = null;
+    
 
-    public void limparCampos() {
+    public void limparCamposUsuario() {
         telaUsuario.txtIdUsuario.setText(null);
         telaUsuario.txtUsuario.setText(null);
         telaUsuario.txtSenha.setText(null);
         telaUsuario.cboAtivo.setSelectedItem("Sim");
-        telaUsuario.cboPerfil.setSelectedItem("Gestor");
         ((DefaultTableModel) tblCadastroUsuario.getModel()).setRowCount(0);
         telaUsuario.lblBotaoSalvar.setEnabled(true);
 
         telaUsuario.txtIdUsuario.setEnabled(true);
         telaUsuario.txtUsuario.setEnabled(true);
         telaUsuario.txtSenha.setEnabled(true);
+    }
+    
+    public void limparCamposPerfil(){
+        telaPerfil.txtIdPerfil.setText(null);
+        telaPerfil.txtPerfil.setText(null);
+        telaPerfil.txtDescricao.setText(null);
     }
 
 }

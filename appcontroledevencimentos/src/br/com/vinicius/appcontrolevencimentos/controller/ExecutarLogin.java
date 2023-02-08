@@ -4,6 +4,7 @@
  */
 package br.com.vinicius.appcontrolevencimentos.controller;
 
+import br.com.vinicius.appcontrolevencimentos.utilities.UsuariosOnline;
 import br.com.vinicius.appcontrolevencimentos.utilities.UsuarioAtivo;
 import br.com.vinicius.appcontrolevencimentos.utilities.StatusServidor;
 import br.com.vinicius.appcontrolevencimentos.utilities.ValidarUsuario;
@@ -24,7 +25,7 @@ public class ExecutarLogin {
     TelaPrincipal telaPrincipal = new TelaPrincipal();
     UsuarioAtivo usuarioAtivo = new UsuarioAtivo();
     ValidarUsuario validarUsuario = new ValidarUsuario();
-    
+    UsuariosOnline usuarioOnline = new UsuariosOnline();
 
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -38,10 +39,10 @@ public class ExecutarLogin {
         try {
 
             if (validarUsuario.validarUsuario(usuario, senha) == true) {
-                telaPrincipal.setVisible(true);
                 statusServidor.checarStatusServidorTelaPrincipal();
                 telaPrincipal.labelUsuarioLogado.setText(usuarioAtivo.getUsuarioAtivoLogin());
-                
+                usuarioOnline.alterarStatusOnline(usuarioOnline.buscarIdUsuario(usuario));
+                telaPrincipal.setVisible(true);
                 conexao.close();
             }
 

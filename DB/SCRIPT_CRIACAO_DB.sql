@@ -16,6 +16,7 @@ create table usuario
     senha varchar(32) not null,
     perfil_id int not null,
     ativo varchar(3) not null default 'NÃO',
+    logado varchar(3) default 'NÃO',
     foreign key(perfil_id) references perfil(id)
     );
     

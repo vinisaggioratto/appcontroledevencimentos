@@ -32,8 +32,7 @@ public class PesquisarUsuario {
         String sql = "select us.id as ID, us.usuario as Usuario, us.senha as Senha, "
                 + "pf.nome as Perfil, us.ativo as Ativo from usuario us "
                 + "join perfil pf on us.perfil_id = pf.id where usuario like ?";
-//        String sql = "select id as Id, usuario as Usuario, senha as Senha, perfil_id as Perfil,"
-//                + " ativo as Ativo from usuario where usuario like ?";
+
 
         try {
             pst = conexao.prepareStatement(sql);

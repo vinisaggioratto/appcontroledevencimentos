@@ -71,9 +71,9 @@
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="btnEntrar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnEntrar" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnFechar" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <Component id="btnFechar" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jPanel3" max="32767" attributes="0"/>
                               <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
@@ -135,9 +135,9 @@
                           <Component id="LabelStatus" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="LabelServidorTrrGral" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelServidorStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="LabelServidorTrrGral" pref="86" max="32767" attributes="0"/>
+                          <Component id="LabelServidorStatus" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="lblConfigServidor" min="-2" pref="37" max="-2" attributes="0"/>
