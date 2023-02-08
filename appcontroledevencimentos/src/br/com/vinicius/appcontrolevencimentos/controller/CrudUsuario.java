@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class CrudUsuario {
 
     TelaCadastroUsuario telaUsuario = null;
-    LimparCampos limpaCampos = new LimparCampos();
+    LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -41,8 +41,6 @@ public class CrudUsuario {
             } else if (telaUsuario.cboPerfil.getSelectedItem().equals("Operacional II")) {
                 pst.setString(3, "3");
             }
-
-            //pst.setInt(3, telaUsuario.cboPerfil.getSelectedItem().toString().charAt(0));
             pst.setString(4, telaUsuario.cboAtivo.getSelectedItem().toString());
 
             if ((telaUsuario.txtUsuario.getText().isEmpty())
@@ -55,7 +53,7 @@ public class CrudUsuario {
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Novo usuário cadastrado com sucesso.");
                 }
-                limpaCampos.limparCamposUsuario();
+                limparCampos.limparCamposUsuario();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar o "

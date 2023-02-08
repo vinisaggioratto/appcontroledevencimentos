@@ -1,8 +1,14 @@
 # appcontroledevencimentos
+
 Aplicação para o controle de vencimentos de documentos e licenças. Usado para o controle de veículos e motoristas.
 
 ----------------------------------------------------
+MELHORIAS PARA O FUTURO:
 
+- Atualizar o sistema de criptografia, trocando o MD5 por outro mais efetivo.
+
+
+----------------------------------------------------
 Atualizações:
 
 01/02/2023
@@ -40,3 +46,5 @@ com o login/fechamento do sistema.
 - Adicionados novos itens ao menu
 - Alterados nomes de alguns métodos
 - Inserido comando para fechar a tela de login após ser acessada a tela principal.
+- Criada a tela de cadastro de perfil 
+- Criada a tela de cadastro de emissor.

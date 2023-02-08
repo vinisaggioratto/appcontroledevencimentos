@@ -28,7 +28,7 @@ public class PesquisarSetarEmissor {
 
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, telaEmissor.txtIdEmissor.getText() + "%");
+            pst.setString(1, telaEmissor.txtEmissor.getText() + "%");
             rs = pst.executeQuery();
             telaEmissor.tblCadastroEmissor.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {

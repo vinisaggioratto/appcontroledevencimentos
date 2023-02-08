@@ -19,6 +19,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     UsuariosOnline usuarioOnline = new UsuariosOnline();
     TelaCadastroPerfil telaPerfil = new TelaCadastroPerfil();
     TelaCadastroEmissor telaEmissor = new TelaCadastroEmissor();
+    TelaCadastroMotorista telaMotorista = new TelaCadastroMotorista();
+    TelaCadastroVeiculo telaVeiculo = new TelaCadastroVeiculo();
     /**
      * Creates new form TelaPrincipal
      */
@@ -200,10 +202,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuCadastroVeiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuCadastroVeiculo.setText("Veículo");
+        menuCadastroVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroVeiculoActionPerformed(evt);
+            }
+        });
         menuCadastros.add(menuCadastroVeiculo);
 
         menuCadastroMotorista.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_DOWN_MASK));
         menuCadastroMotorista.setText("Motorista");
+        menuCadastroMotorista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroMotoristaActionPerformed(evt);
+            }
+        });
         menuCadastros.add(menuCadastroMotorista);
         menuCadastros.add(jSeparator2);
 
@@ -373,6 +385,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaPerfil.setPosicao();
         
     }//GEN-LAST:event_menuCadastroPerfilActionPerformed
+
+    private void menuCadastroMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroMotoristaActionPerformed
+        // TODO add your handling code here:
+        telaMotorista.setVisible(true);
+        desktopPanel.add(telaMotorista);
+        telaMotorista.setPosicao();
+    }//GEN-LAST:event_menuCadastroMotoristaActionPerformed
+
+    private void menuCadastroVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroVeiculoActionPerformed
+        // TODO add your handling code here:
+        telaVeiculo.setVisible(true);
+        desktopPanel.add(telaVeiculo);
+        telaVeiculo.setPosicao();
+    }//GEN-LAST:event_menuCadastroVeiculoActionPerformed
 
     /**
      * @param args the command line arguments

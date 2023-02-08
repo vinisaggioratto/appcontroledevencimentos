@@ -33,7 +33,6 @@ public class PesquisarSetarUsuario {
                 + "pf.nome as Perfil, us.ativo as Ativo from usuario us "
                 + "join perfil pf on us.perfil_id = pf.id where usuario like ?";
 
-
         try {
             pst = conexao.prepareStatement(sql);
             //passando o conteudo da caixa de pesquisa para o ?
@@ -63,6 +62,11 @@ public class PesquisarSetarUsuario {
             telaUsuario.txtUsuario.setEnabled(false);
             telaUsuario.txtSenha.setEnabled(false);
             telaUsuario.cboPerfil.setEnabled(false);
+        } else {
+            telaUsuario.txtIdUsuario.setEnabled(true);
+            telaUsuario.txtUsuario.setEnabled(true);
+            telaUsuario.txtSenha.setEnabled(true);
+            telaUsuario.cboPerfil.setEnabled(true);
         }
     }
 }

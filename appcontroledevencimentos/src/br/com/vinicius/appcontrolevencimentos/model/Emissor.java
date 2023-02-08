@@ -37,5 +37,4 @@ public class Emissor {
         this.nome = nome;
     }
     
-    
 }

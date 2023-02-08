@@ -5,6 +5,7 @@
 package br.com.vinicius.appcontrolevencimentos.connection;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  * Método responsável pela conexao com o banco
@@ -45,6 +46,18 @@ public class ModuloConexao {
         } catch (Exception e) {
             System.out.println("Erro ao conectar ao banco." + e);
             return null;
+        }
+    }
+    
+    public void fecharConexao(Connection conexao){
+        
+        try {
+            if(conexao != null && !conexao.isClosed()){
+                conexao.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Erro ao fechar conexão.\n" + e 
+                    + JOptionPane.ERROR_MESSAGE);
         }
     }
 

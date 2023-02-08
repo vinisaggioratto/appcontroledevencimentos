@@ -5,7 +5,9 @@
 package br.com.vinicius.appcontrolevencimentos.view;
 
 import br.com.vinicius.appcontrolevencimentos.controller.CrudEmissor;
+import br.com.vinicius.appcontrolevencimentos.controller.EmissorDAO;
 import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarEmissor;
+import br.com.vinicius.appcontrolevencimentos.model.Emissor;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -20,6 +22,10 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
     CrudEmissor crudEmissor = new CrudEmissor();
     LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
+    
+    //Teste novo método para salvar
+    Emissor emissor = new Emissor();
+    EmissorDAO emissorDAO = new EmissorDAO();
 
     /**
      * Creates new form TelaCadUsuario
@@ -242,10 +248,18 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
 
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
+        //passando os dados para a classe emissor
+        
+        
+        
         if (txtIdEmissor.getText().isEmpty()) {
-            crudEmissor.cadastrarEmissor();
+            emissor.setNome(txtEmissor.getText());
+            emissorDAO.cadastrarEmissor(emissor);
         } else {
-            crudEmissor.editarEmissor();
+            emissor.setNome(txtEmissor.getText());
+            emissor.setId(Integer.parseInt(txtIdEmissor.getText()));
+            emissorDAO.alterarEmissor(emissor);
+//crudEmissor.editarEmissor();
         }
 
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
