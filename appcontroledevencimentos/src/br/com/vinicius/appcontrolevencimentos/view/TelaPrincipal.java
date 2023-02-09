@@ -21,6 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaCadastroEmissor telaEmissor = new TelaCadastroEmissor();
     TelaCadastroMotorista telaMotorista = new TelaCadastroMotorista();
     TelaCadastroVeiculo telaVeiculo = new TelaCadastroVeiculo();
+    TelaCadastroLicenca telaLicenca = new TelaCadastroLicenca();
     /**
      * Creates new form TelaPrincipal
      */
@@ -29,7 +30,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
     }
 
     /**
@@ -334,6 +334,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menuCadastroLicencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroLicencaActionPerformed
         // TODO add your handling code here:
+        telaLicenca.setVisible(true);
+        desktopPanel.add(telaLicenca);
+        telaLicenca.setPosicao();
     }//GEN-LAST:event_menuCadastroLicencaActionPerformed
 
     private void menuSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairSairActionPerformed

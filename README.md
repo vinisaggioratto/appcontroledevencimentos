@@ -48,3 +48,8 @@ com o login/fechamento do sistema.
 - Inserido comando para fechar a tela de login após ser acessada a tela principal.
 - Criada a tela de cadastro de perfil 
 - Criada a tela de cadastro de emissor.
+
+**********
+08/02/2023
+- Criadas telas de cadastro de motoristas e licenças.
+- Criado método que preenche o combobox emissor da tela licenças com as informações do banco de dados.

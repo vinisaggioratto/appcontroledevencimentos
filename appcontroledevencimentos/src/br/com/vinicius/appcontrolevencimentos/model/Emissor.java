@@ -4,16 +4,20 @@
  */
 package br.com.vinicius.appcontrolevencimentos.model;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author FROTA01-PC
  */
 public class Emissor {
-    
     private int id;
     private String nome;
+    public List<Emissor> listEmissor = new ArrayList<>();
 
     public Emissor() {
+
     }
 
     public Emissor(int id, String nome) {
@@ -37,4 +41,11 @@ public class Emissor {
         this.nome = nome;
     }
     
+    @Override
+    public String toString(){
+        return
+                this.getId()
+                +" - "
+                + this.getNome();
+    } 
 }

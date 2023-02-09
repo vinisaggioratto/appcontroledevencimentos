@@ -5,6 +5,7 @@
 package br.com.vinicius.appcontrolevencimentos.controller;
 
 import br.com.vinicius.appcontrolevencimentos.connection.ModuloConexao;
+import br.com.vinicius.appcontrolevencimentos.model.Emissor;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroEmissor;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class PesquisarSetarEmissor {
 
+    Emissor emissor = new Emissor();
     TelaCadastroEmissor telaEmissor = null;
     Connection conexao = null;
     PreparedStatement pst = null;
@@ -28,7 +30,7 @@ public class PesquisarSetarEmissor {
 
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, telaEmissor.txtEmissor.getText() + "%");
+            pst.setString(1, telaEmissor.txtPesquisarEmissor.getText() + "%");
             rs = pst.executeQuery();
             telaEmissor.tblCadastroEmissor.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
@@ -40,6 +42,5 @@ public class PesquisarSetarEmissor {
         int setar = telaEmissor.tblCadastroEmissor.getSelectedRow();
         telaEmissor.txtIdEmissor.setText(telaEmissor.tblCadastroEmissor.getModel().getValueAt(setar, 0).toString());
         telaEmissor.txtEmissor.setText(telaEmissor.tblCadastroEmissor.getModel().getValueAt(setar, 1).toString());
-
     }
 }

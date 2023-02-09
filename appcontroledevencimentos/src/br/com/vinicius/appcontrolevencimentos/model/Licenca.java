@@ -61,5 +61,9 @@ public class Licenca {
         this.ativo = ativo;
     }
     
+    @Override
+    public String toString(){
+        return this.nome;
+    }
     
 }

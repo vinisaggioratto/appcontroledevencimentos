@@ -4,10 +4,10 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
-import br.com.vinicius.appcontrolevencimentos.controller.EmissorDAO;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarEmissor;
-import br.com.vinicius.appcontrolevencimentos.model.Emissor;
+import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarLicenca;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
+import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarUsuario;
+import br.com.vinicius.appcontrolevencimentos.model.Emissor;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -15,21 +15,19 @@ import java.sql.Connection;
  *
  * @author FROTA01-PC
  */
-public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
-
-    PesquisarSetarEmissor pesquisarEmissor = new PesquisarSetarEmissor();
-    LimparCampos limparCampos = new LimparCampos();
-    Connection conexao = null;
-    
-    //Teste novo método para salvar
+public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
+    PesquisarSetarLicenca pesquisarLicenca = new PesquisarSetarLicenca();
     Emissor emissor = new Emissor();
-    EmissorDAO emissorDAO = new EmissorDAO();
+
+    LimparCampos limpaCampos = new LimparCampos();
+    Connection conexao = null;
 
     /**
      * Creates new form TelaCadUsuario
      */
-    public TelaCadastroEmissor() {
+    public TelaCadastroLicenca() {
         initComponents();
+        pesquisarLicenca.preencherComboBox();
     }
 
     public void setPosicao() {
@@ -51,18 +49,22 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
         lblBotaoSalvar = new javax.swing.JLabel();
         lblBotaoCancelar = new javax.swing.JLabel();
         lblBotaoExcluir = new javax.swing.JLabel();
-        txtPesquisarEmissor = new javax.swing.JTextField();
-        btnPesquisarEmissor = new javax.swing.JButton();
+        txtPesquisarLicenca = new javax.swing.JTextField();
+        btnPesquisarLicenca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCadastroEmissor = new javax.swing.JTable();
+        tblCadastroLicenca = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        txtIdEmissor = new javax.swing.JTextField();
+        txtIdLicenca = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtEmissor = new javax.swing.JTextField();
+        txtNomeLicenca = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cboAtivo = new javax.swing.JComboBox<>();
+        cboEmissor = new javax.swing.JComboBox<>();
 
         setClosable(true);
-        setTitle("Cadastrar Emissor");
-        setToolTipText("Cadastrar Emissor");
+        setTitle("Cadastrar Licença");
+        setToolTipText("Cadastrar Licença");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -115,7 +117,7 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
                 .addComponent(lblBotaoCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBotaoExcluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(447, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,44 +131,61 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtPesquisarEmissor.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPesquisarLicenca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisarEmissorKeyReleased(evt);
+                txtPesquisarLicencaKeyReleased(evt);
             }
         });
 
-        btnPesquisarEmissor.setText("Pesquisar");
-        btnPesquisarEmissor.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnPesquisarLicenca.setText("Pesquisar");
+        btnPesquisarLicenca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPesquisarEmissorMouseClicked(evt);
+                btnPesquisarLicencaMouseClicked(evt);
             }
         });
 
-        tblCadastroEmissor.setModel(new javax.swing.table.DefaultTableModel(
+        tblCadastroLicenca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Emissor"
+                "ID", "Licença", "Emissor", "Ativo"
             }
         ));
-        tblCadastroEmissor.setShowGrid(true);
-        tblCadastroEmissor.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblCadastroLicenca.setShowGrid(true);
+        tblCadastroLicenca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblCadastroEmissorMouseClicked(evt);
+                tblCadastroLicencaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblCadastroEmissor);
+        jScrollPane1.setViewportView(tblCadastroLicenca);
 
         jLabel1.setText("Id:");
 
-        txtIdEmissor.setEditable(false);
-        txtIdEmissor.setBackground(new java.awt.Color(204, 204, 204));
+        txtIdLicenca.setEditable(false);
+        txtIdLicenca.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel2.setText("Perfil:");
+        jLabel2.setText("Nome:");
+
+        jLabel3.setText("Emissor:");
+
+        jLabel5.setText("Ativo?");
+
+        cboAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+
+        cboEmissor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboEmissorMouseClicked(evt);
+            }
+        });
+        cboEmissor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEmissorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,27 +194,28 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPesquisarEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPesquisarLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisarEmissor))
+                                .addComponent(btnPesquisarLicenca))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIdEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(227, 227, 227))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addContainerGap())))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNomeLicenca, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                    .addComponent(txtIdLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboEmissor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,87 +224,100 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPesquisarEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisarEmissor))
+                    .addComponent(txtPesquisarLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarLicenca))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(txtNomeLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cboEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleDescription("");
-
-        setBounds(0, 0, 627, 417);
+        setBounds(0, 0, 627, 519);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPesquisarEmissorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarEmissorKeyReleased
+    private void txtPesquisarLicencaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarLicencaKeyReleased
         // TODO add your handling code here:
-        pesquisarEmissor.pesquisarEmissor();
-    }//GEN-LAST:event_txtPesquisarEmissorKeyReleased
+        pesquisarLicenca.pesquisarLicenca();
+    }//GEN-LAST:event_txtPesquisarLicencaKeyReleased
 
-    private void tblCadastroEmissorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCadastroEmissorMouseClicked
+    private void tblCadastroLicencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCadastroLicencaMouseClicked
         // TODO add your handling code here:
-        pesquisarEmissor.setarEmissor();
-    }//GEN-LAST:event_tblCadastroEmissorMouseClicked
+        pesquisarLicenca.setarLicenca();
+    }//GEN-LAST:event_tblCadastroLicencaMouseClicked
 
     private void lblBotaoCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoCancelarMouseClicked
         // TODO add your handling code here:
-        limparCampos.limparCamposEmissor();
+        limpaCampos.limparCamposLicenca();
     }//GEN-LAST:event_lblBotaoCancelarMouseClicked
 
-    private void btnPesquisarEmissorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarEmissorMouseClicked
+    private void btnPesquisarLicencaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarLicencaMouseClicked
         // TODO add your handling code here:
-        pesquisarEmissor.pesquisarEmissor();
-    }//GEN-LAST:event_btnPesquisarEmissorMouseClicked
+        pesquisarLicenca.pesquisarLicenca();
+    }//GEN-LAST:event_btnPesquisarLicencaMouseClicked
 
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
-        //passando os dados para a classe emissor
-
-        if (txtIdEmissor.getText().isEmpty()) {
-            emissor.setNome(txtEmissor.getText());
-            emissorDAO.cadastrarEmissor(emissor);
-        } else {
-            emissor.setNome(txtEmissor.getText());
-            emissor.setId(Integer.parseInt(txtIdEmissor.getText()));
-            emissorDAO.alterarEmissor(emissor);
+        if(txtIdLicenca.getText().isEmpty()){
+            //crudUsuario.cadastrarUsuario();   
+        }else{
+            //crudUsuario.editarUsuario();
         }
-
+        
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
 
     private void lblBotaoNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoNovoMouseClicked
         // TODO add your handling code here:
-        limparCampos.limparCamposEmissor();
+        limpaCampos.limparCamposLicenca();
     }//GEN-LAST:event_lblBotaoNovoMouseClicked
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        
-        emissor.setId(Integer.parseInt(txtIdEmissor.getText()));
-        emissorDAO.excluirEmissor(emissor);
+        //crudUsuario.excluirUsuario();
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
+
+    private void cboEmissorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmissorActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboEmissorActionPerformed
+
+    private void cboEmissorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboEmissorMouseClicked
+        // TODO add your handling code here:
+        System.out.println("posicao: "+cboEmissor.getSelectedIndex());
+    }//GEN-LAST:event_cboEmissorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPesquisarEmissor;
+    private javax.swing.JButton btnPesquisarLicenca;
+    public static javax.swing.JComboBox<String> cboAtivo;
+    public static javax.swing.JComboBox<String> cboEmissor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lblBotaoCancelar;
     public static javax.swing.JLabel lblBotaoExcluir;
     public static javax.swing.JLabel lblBotaoNovo;
     public static javax.swing.JLabel lblBotaoSalvar;
-    public static javax.swing.JTable tblCadastroEmissor;
-    public static javax.swing.JTextField txtEmissor;
-    public static javax.swing.JTextField txtIdEmissor;
-    public static javax.swing.JTextField txtPesquisarEmissor;
+    public static javax.swing.JTable tblCadastroLicenca;
+    public static javax.swing.JTextField txtIdLicenca;
+    public static javax.swing.JTextField txtNomeLicenca;
+    public static javax.swing.JTextField txtPesquisarLicenca;
     // End of variables declaration//GEN-END:variables
 }
