@@ -4,6 +4,7 @@
  */
 package br.com.vinicius.appcontrolevencimentos.utilities;
 
+import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroDocumento;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroEmissor;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroLicenca;
 import br.com.vinicius.appcontrolevencimentos.view.TelaCadastroMotorista;
@@ -25,6 +26,7 @@ public class LimparCampos {
     TelaCadastroMotorista telaMotorista = null;
     TelaCadastroVeiculo telaVeiculo = null;
     TelaCadastroLicenca telaLicenca = null;
+    TelaCadastroDocumento telaDocumento = null;
 
     public void limparCamposUsuario() {
         telaUsuario.txtIdUsuario.setText(null);
@@ -68,14 +70,21 @@ public class LimparCampos {
         telaVeiculo.cboAtivo.setSelectedItem("Sim");
         ((DefaultTableModel) telaVeiculo.tblCadastroVeiculo.getModel()).setRowCount(0);
     }
-    
-        public void limparCamposLicenca() {
+
+    public void limparCamposLicenca() {
         telaLicenca.txtIdLicenca.setText(null);
         telaLicenca.txtNomeLicenca.setText(null);
-        telaLicenca.cboEmissor.setSelectedItem(null);
+        telaLicenca.cboEmissorLicenca.setSelectedItem(null);
         telaLicenca.cboAtivo.setSelectedItem("Sim");
         ((DefaultTableModel) telaLicenca.tblCadastroLicenca.getModel()).setRowCount(0);
     }
-    
-    
+
+    public void limparCamposDocumento() {
+        telaDocumento.txtIdDocumento.setText(null);
+        telaDocumento.txtNomeDocumento.setText(null);
+        telaDocumento.cboEmissorDocumento.setSelectedItem(null);
+        telaDocumento.cboAtivo.setSelectedItem("Sim");
+        ((DefaultTableModel) telaDocumento.tblCadastroDocumento.getModel()).setRowCount(0);
+    }
+
 }

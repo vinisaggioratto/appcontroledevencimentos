@@ -12,33 +12,54 @@ import java.util.Date;
  */
 public class MotoristaVeiculo {
     
-    private Motorista motorista;
-    private Veiculo veiculo;
+    private int motorista;
+    private int veiculo;
     private Date data_inicial;
     private Date data_final;
     private String ativo;
+    private int usuario;
 
-    public MotoristaVeiculo(Motorista motorista, Veiculo veiculo, Date data_inicial, Date data_final, String ativo) {
+    public MotoristaVeiculo() {
+    }
+
+    public MotoristaVeiculo(int motorista, int veiculo, Date data_inicial, String ativo, int usuario) {
+        this.motorista = motorista;
+        this.veiculo = veiculo;
+        this.data_inicial = data_inicial;
+        this.ativo = ativo;
+        this.usuario = usuario;
+    }
+
+    public MotoristaVeiculo(int motorista, int veiculo, Date data_inicial, Date data_final, String ativo, int usuario) {
         this.motorista = motorista;
         this.veiculo = veiculo;
         this.data_inicial = data_inicial;
         this.data_final = data_final;
         this.ativo = ativo;
+        this.usuario = usuario;
     }
 
-    public Motorista getMotorista() {
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getMotorista() {
         return motorista;
     }
 
-    public void setMotorista(Motorista motorista) {
+    public void setMotorista(int motorista) {
         this.motorista = motorista;
     }
 
-    public Veiculo getVeiculo() {
+    public int getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
+    public void setVeiculo(int veiculo) {
         this.veiculo = veiculo;
     }
 

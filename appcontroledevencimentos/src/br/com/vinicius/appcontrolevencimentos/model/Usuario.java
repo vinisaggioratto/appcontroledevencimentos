@@ -13,15 +13,17 @@ public class Usuario {
     private int id;
     private String nome;
     private String senha;
+    private int perfil;
     private String ativo;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String senha, String ativo) {
+    public Usuario(int id, String nome, String senha, int perfil, String ativo) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
+        this.perfil = perfil;
         this.ativo = ativo;
     }
 
@@ -39,6 +41,14 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(int perfil) {
+        this.perfil = perfil;
     }
 
     public String getSenha() {

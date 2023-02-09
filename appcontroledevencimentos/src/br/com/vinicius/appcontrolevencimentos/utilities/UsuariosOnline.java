@@ -7,6 +7,7 @@ package br.com.vinicius.appcontrolevencimentos.utilities;
 import br.com.vinicius.appcontrolevencimentos.connection.ModuloConexao;
 import br.com.vinicius.appcontrolevencimentos.view.TelaLogin;
 import br.com.vinicius.appcontrolevencimentos.view.TelaPrincipal;
+import static br.com.vinicius.appcontrolevencimentos.view.TelaPrincipal.tblUsuariosOnline;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -57,7 +58,6 @@ public class UsuariosOnline {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, usuario_id);
             pst.executeUpdate();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar status usuários. " + e);
 

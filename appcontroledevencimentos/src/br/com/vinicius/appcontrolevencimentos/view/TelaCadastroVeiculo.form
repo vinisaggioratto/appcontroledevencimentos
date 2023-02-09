@@ -13,6 +13,9 @@
     <SyntheticProperty name="generatePosition" type="boolean" value="true"/>
     <SyntheticProperty name="generateSize" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameClosing" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -54,11 +57,9 @@
                                   <Component id="txtPlaca" pref="322" max="32767" attributes="0"/>
                                   <Component id="txtModeloVeiculo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtIdVeiculo" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cboAtivo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cboBottom" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cboTipoVeiculo" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="cboAtivo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cboBottom" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cboTipoVeiculo" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -368,16 +369,7 @@
     <Component class="javax.swing.JComboBox" name="cboTipoVeiculo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="8">
-            <StringItem index="0" value="Utilit&#xe1;rio"/>
-            <StringItem index="1" value="Toco"/>
-            <StringItem index="2" value="Truck"/>
-            <StringItem index="3" value="Quarto Eixo"/>
-            <StringItem index="4" value="Cavalo Mec&#xe2;nico"/>
-            <StringItem index="5" value="Vanderl&#xe9;ia"/>
-            <StringItem index="6" value="Bi-trem"/>
-            <StringItem index="7" value="Rodo-Trem"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

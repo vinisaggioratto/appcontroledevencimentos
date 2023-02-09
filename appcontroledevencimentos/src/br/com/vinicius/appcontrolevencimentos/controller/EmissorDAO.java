@@ -73,7 +73,7 @@ public class EmissorDAO {
                 }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar Emissor."
+            JOptionPane.showMessageDialog(null, "Erro ao alterar Emissor."
                     + e + JOptionPane.ERROR_MESSAGE);
         } finally {
             con.fecharConexao(conexao);

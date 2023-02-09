@@ -19,6 +19,10 @@ public class Emissor {
     public Emissor() {
 
     }
+    
+    public Emissor(int id){
+        this.id = id;
+    }
 
     public Emissor(int id, String nome) {
         this.id = id;

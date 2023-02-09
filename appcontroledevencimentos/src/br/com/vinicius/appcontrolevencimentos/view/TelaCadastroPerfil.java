@@ -4,9 +4,10 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
-import br.com.vinicius.appcontrolevencimentos.controller.CrudPerfil;
+import br.com.vinicius.appcontrolevencimentos.controller.PerfilDAO;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarPerfil;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarPerfil;
+import br.com.vinicius.appcontrolevencimentos.model.Perfil;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -17,7 +18,8 @@ import java.sql.Connection;
 public class TelaCadastroPerfil extends javax.swing.JInternalFrame {
 
     PesquisarSetarPerfil pesquisarPerfil = new PesquisarSetarPerfil();
-    CrudPerfil crudPerfil = new CrudPerfil();
+    PerfilDAO perfilDAO = new PerfilDAO();
+    Perfil perfil = new Perfil();
     LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
 
@@ -254,9 +256,11 @@ public class TelaCadastroPerfil extends javax.swing.JInternalFrame {
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
         if (txtIdPerfil.getText().isEmpty()) {
-            crudPerfil.cadastrarPerfil();
+            perfil.setNome(txtPerfil.getText());
+            perfil.setDescricao(txtDescricao.getText());
+            perfilDAO.cadastrarPerfil(perfil);
         } else {
-            crudPerfil.editarPerfil();
+            perfilDAO.editarPerfil(perfil);
         }
 
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -268,7 +272,8 @@ public class TelaCadastroPerfil extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        crudPerfil.excluirPerfil();
+        perfil.setId(Integer.parseInt(txtIdPerfil.getText()));
+        perfilDAO.excluirPerfil(perfil);
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
 

@@ -4,10 +4,10 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarLicenca;
+import br.com.vinicius.appcontrolevencimentos.controller.LicencaDAO;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarLicenca;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarUsuario;
-import br.com.vinicius.appcontrolevencimentos.model.Emissor;
+import br.com.vinicius.appcontrolevencimentos.model.Licenca;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -17,7 +17,9 @@ import java.sql.Connection;
  */
 public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
     PesquisarSetarLicenca pesquisarLicenca = new PesquisarSetarLicenca();
-    Emissor emissor = new Emissor();
+    LicencaDAO licencaDAO = new LicencaDAO();
+    Licenca licenca = new Licenca();
+    
 
     LimparCampos limpaCampos = new LimparCampos();
     Connection conexao = null;
@@ -27,7 +29,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
      */
     public TelaCadastroLicenca() {
         initComponents();
-        pesquisarLicenca.preencherComboBox();
+
     }
 
     public void setPosicao() {
@@ -60,17 +62,34 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cboAtivo = new javax.swing.JComboBox<>();
-        cboEmissor = new javax.swing.JComboBox<>();
+        cboEmissorLicenca = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("Cadastrar Licença");
         setToolTipText("Cadastrar Licença");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblBotaoNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/adicionar-ficheiro.png"))); // NOI18N
         lblBotaoNovo.setToolTipText("Novo");
-        lblBotaoNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotaoNovo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblBotaoNovo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoNovoMouseClicked(evt);
@@ -79,7 +98,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
 
         lblBotaoSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/salve-.png"))); // NOI18N
         lblBotaoSalvar.setToolTipText("Salvar");
-        lblBotaoSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotaoSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblBotaoSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoSalvarMouseClicked(evt);
@@ -88,7 +107,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
 
         lblBotaoCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/cancelar.png"))); // NOI18N
         lblBotaoCancelar.setToolTipText("Cancelar");
-        lblBotaoCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotaoCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblBotaoCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoCancelarMouseClicked(evt);
@@ -97,7 +116,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
 
         lblBotaoExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/vinicius/appcontrolevencimentos/icons/bin.png"))); // NOI18N
         lblBotaoExcluir.setToolTipText("Excluir");
-        lblBotaoExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBotaoExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblBotaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBotaoExcluirMouseClicked(evt);
@@ -176,14 +195,9 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
 
         cboAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
 
-        cboEmissor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboEmissorMouseClicked(evt);
-            }
-        });
-        cboEmissor.addActionListener(new java.awt.event.ActionListener() {
+        cboEmissorLicenca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboEmissorActionPerformed(evt);
+                cboEmissorLicencaActionPerformed(evt);
             }
         });
 
@@ -213,7 +227,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
                                     .addComponent(txtNomeLicenca, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                                     .addComponent(txtIdLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cboAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboEmissor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cboEmissorLicenca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -239,7 +253,7 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cboEmissor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboEmissorLicenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -273,9 +287,16 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
         if(txtIdLicenca.getText().isEmpty()){
-            //crudUsuario.cadastrarUsuario();   
+            licenca.setNome(txtNomeLicenca.getText());
+            licenca.setEmissor(pesquisarLicenca.retornarIdEmissor());
+            licenca.setAtivo(cboAtivo.getSelectedItem().toString());
+            licencaDAO.cadastrarLicenca(licenca);  
         }else{
-            //crudUsuario.editarUsuario();
+            licenca.setNome(txtNomeLicenca.getText());
+            licenca.setEmissor(pesquisarLicenca.retornarIdEmissor());
+            licenca.setAtivo(cboAtivo.getSelectedItem().toString());
+            licenca.setId(Integer.parseInt(txtIdLicenca.getText()));
+            licencaDAO.alterarLicenca(licenca); 
         }
         
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -287,24 +308,27 @@ public class TelaCadastroLicenca extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        //crudUsuario.excluirUsuario();
+        licenca.setId(Integer.parseInt(txtIdLicenca.getText()));
+        licencaDAO.excluirLicenca(licenca);
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
-    private void cboEmissorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmissorActionPerformed
+    private void cboEmissorLicencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmissorLicencaActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_cboEmissorActionPerformed
+        System.out.println("posicao: "+cboEmissorLicenca.getSelectedIndex());
+        
+    }//GEN-LAST:event_cboEmissorLicencaActionPerformed
 
-    private void cboEmissorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboEmissorMouseClicked
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         // TODO add your handling code here:
-        System.out.println("posicao: "+cboEmissor.getSelectedIndex());
-    }//GEN-LAST:event_cboEmissorMouseClicked
+        cboEmissorLicenca.removeAllItems();
+    }//GEN-LAST:event_formInternalFrameClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisarLicenca;
     public static javax.swing.JComboBox<String> cboAtivo;
-    public static javax.swing.JComboBox<String> cboEmissor;
+    public static javax.swing.JComboBox<String> cboEmissorLicenca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

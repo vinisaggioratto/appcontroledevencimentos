@@ -4,8 +4,9 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
-import br.com.vinicius.appcontrolevencimentos.controller.CrudMotorista;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarMotorista;
+import br.com.vinicius.appcontrolevencimentos.controller.MotoristaDAO;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarMotorista;
+import br.com.vinicius.appcontrolevencimentos.model.Motorista;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -17,7 +18,8 @@ import java.sql.Connection;
 public class TelaCadastroMotorista extends javax.swing.JInternalFrame {
 
     PesquisarSetarMotorista pesquisarMotorista = new PesquisarSetarMotorista();
-    CrudMotorista crudMotorista = new CrudMotorista();
+    MotoristaDAO motoristaDAO = new MotoristaDAO();
+    Motorista motorista = new Motorista();
     LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
 
@@ -163,7 +165,7 @@ public class TelaCadastroMotorista extends javax.swing.JInternalFrame {
         txtIdMotorista.setEditable(false);
         txtIdMotorista.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel2.setText("Perfil:");
+        jLabel2.setText("Nome:");
 
         jLabel3.setText("Ativo:");
 
@@ -251,9 +253,11 @@ public class TelaCadastroMotorista extends javax.swing.JInternalFrame {
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
         if (txtIdMotorista.getText().isEmpty()) {
-            crudMotorista.cadastrarMotorista();
+            motorista.setNome(txtMotorista.getText());
+            motorista.setAtivo(cboAtivoMotorista.getSelectedItem().toString());
+            motoristaDAO.cadastrarMotorista(motorista);
         } else {
-            crudMotorista.editarMotorista();
+            motoristaDAO.editarMotorista(motorista);
         }
 
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -265,7 +269,8 @@ public class TelaCadastroMotorista extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        crudMotorista.excluirMotorista();
+        motorista.setId(Integer.parseInt(txtIdMotorista.getText()));
+        motoristaDAO.excluirMotorista(motorista);
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
 

@@ -4,6 +4,9 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarLicenca;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarMotoristaVeiculo;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarVeiculo;
 import br.com.vinicius.appcontrolevencimentos.utilities.UsuariosOnline;
 import br.com.vinicius.appcontrolevencimentos.utilities.FecharSistema;
 import javax.swing.JFrame;
@@ -22,13 +25,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaCadastroMotorista telaMotorista = new TelaCadastroMotorista();
     TelaCadastroVeiculo telaVeiculo = new TelaCadastroVeiculo();
     TelaCadastroLicenca telaLicenca = new TelaCadastroLicenca();
+    PesquisarSetarLicenca pesquisarLicenca = new PesquisarSetarLicenca();
+    TelaCadastroDocumento telaDocumento = new TelaCadastroDocumento();
+    PesquisarSetarVeiculo pesquisarVeiculo = new PesquisarSetarVeiculo();
+    TelaVincularMotoristaVeiculo telaMotoristaVeiculo = new TelaVincularMotoristaVeiculo();
+    PesquisarSetarMotoristaVeiculo pesquisarMotoristaVeiculo = new PesquisarSetarMotoristaVeiculo();
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
 
         initComponents();
-
+        usuarioOnline.usuarioOnline();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -62,6 +70,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuCadastroUsuario = new javax.swing.JMenuItem();
         menuCadastroPerfil = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        menuVincularMotoristaVeiculo = new javax.swing.JMenuItem();
         menuDocumentos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -77,6 +87,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Controle de Vencimentos");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -239,6 +252,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuCadastros);
 
+        jMenu1.setText("Vincular");
+
+        menuVincularMotoristaVeiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        menuVincularMotoristaVeiculo.setText("Motorista - Veículo");
+        menuVincularMotoristaVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVincularMotoristaVeiculoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuVincularMotoristaVeiculo);
+
+        jMenuBar1.add(jMenu1);
+
         menuDocumentos.setText("Documentos");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -330,6 +356,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menuCadastroDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroDocumentoActionPerformed
         // TODO add your handling code here:
+        telaDocumento.setVisible(true);
+        desktopPanel.add(telaDocumento);
+        telaDocumento.setPosicao();
+        pesquisarLicenca.preencherComboBox();
     }//GEN-LAST:event_menuCadastroDocumentoActionPerformed
 
     private void menuCadastroLicencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroLicencaActionPerformed
@@ -337,6 +367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaLicenca.setVisible(true);
         desktopPanel.add(telaLicenca);
         telaLicenca.setPosicao();
+        pesquisarLicenca.preencherComboBox();
     }//GEN-LAST:event_menuCadastroLicencaActionPerformed
 
     private void menuSairSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairSairActionPerformed
@@ -401,7 +432,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaVeiculo.setVisible(true);
         desktopPanel.add(telaVeiculo);
         telaVeiculo.setPosicao();
+        pesquisarVeiculo.preencherComboBox();
     }//GEN-LAST:event_menuCadastroVeiculoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        usuarioOnline.usuarioOnline();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void menuVincularMotoristaVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVincularMotoristaVeiculoActionPerformed
+        // TODO add your handling code here:
+        telaMotoristaVeiculo.setVisible(true);
+        desktopPanel.add(telaMotoristaVeiculo);
+        telaMotoristaVeiculo.setPosicao();
+        pesquisarMotoristaVeiculo.preencherComboBoxMotorista();
+        pesquisarMotoristaVeiculo.preencherComboBoxVeiculo();
+        
+    }//GEN-LAST:event_menuVincularMotoristaVeiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,6 +481,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
+                
             }
         });
     }
@@ -443,6 +491,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane desktopPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -470,6 +519,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenuItem menuSairSair;
+    private javax.swing.JMenuItem menuVincularMotoristaVeiculo;
     public static javax.swing.JTable tblUsuariosOnline;
     // End of variables declaration//GEN-END:variables
 }

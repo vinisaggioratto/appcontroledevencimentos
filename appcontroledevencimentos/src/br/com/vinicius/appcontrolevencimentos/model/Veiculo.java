@@ -14,13 +14,13 @@ public class Veiculo {
     private String placa;
     private String modelo;
     private String bottom;
-    private TipoVeiculo tipo;
+    private int tipo;
     private String ativo;
 
     public Veiculo() {
     }
 
-    public Veiculo(int id, String placa, String modelo, String bottom, TipoVeiculo tipo, String ativo) {
+    public Veiculo(int id, String placa, String modelo, String bottom, int tipo, String ativo) {
         this.id = id;
         this.placa = placa;
         this.modelo = modelo;
@@ -61,11 +61,11 @@ public class Veiculo {
         this.bottom = bottom;
     }
 
-    public TipoVeiculo getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoVeiculo tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 

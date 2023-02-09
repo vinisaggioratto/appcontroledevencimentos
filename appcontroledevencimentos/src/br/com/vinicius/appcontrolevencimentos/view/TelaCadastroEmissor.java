@@ -5,9 +5,11 @@
 package br.com.vinicius.appcontrolevencimentos.view;
 
 import br.com.vinicius.appcontrolevencimentos.controller.EmissorDAO;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarEmissor;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarEmissor;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarLicenca;
 import br.com.vinicius.appcontrolevencimentos.model.Emissor;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
+import static br.com.vinicius.appcontrolevencimentos.view.TelaCadastroLicenca.cboEmissorLicenca;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -18,6 +20,7 @@ import java.sql.Connection;
 public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
 
     PesquisarSetarEmissor pesquisarEmissor = new PesquisarSetarEmissor();
+    PesquisarSetarLicenca pesquisarLicenca = new PesquisarSetarLicenca();
     LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
     
@@ -251,10 +254,12 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
         if (txtIdEmissor.getText().isEmpty()) {
             emissor.setNome(txtEmissor.getText());
             emissorDAO.cadastrarEmissor(emissor);
+            //cboEmissorLicenca.updateUI();
         } else {
             emissor.setNome(txtEmissor.getText());
             emissor.setId(Integer.parseInt(txtIdEmissor.getText()));
             emissorDAO.alterarEmissor(emissor);
+            //cboEmissorLicenca.updateUI();
         }
 
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -269,6 +274,7 @@ public class TelaCadastroEmissor extends javax.swing.JInternalFrame {
         
         emissor.setId(Integer.parseInt(txtIdEmissor.getText()));
         emissorDAO.excluirEmissor(emissor);
+        //cboEmissorLicenca.updateUI();
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
 

@@ -53,3 +53,13 @@ com o login/fechamento do sistema.
 08/02/2023
 - Criadas telas de cadastro de motoristas e licenças.
 - Criado método que preenche o combobox emissor da tela licenças com as informações do banco de dados.
+
+**********
+09/02/2023
+- Alterado código de atualização do combobox emissor da tela de cadastro de licenças.
+- Melhorado o código de crud da licença.
+- Agora ao abrir o sistema, aparece automaticamente os usuários ativos.
+- Alterado posicionamento inicial do form de alterar endereço e porta do servidor.
+- Criada classe Perfil.
+- Alterando classes para o padrão DAO.
+

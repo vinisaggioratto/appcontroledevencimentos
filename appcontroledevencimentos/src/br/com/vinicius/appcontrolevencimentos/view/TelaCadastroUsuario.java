@@ -5,8 +5,9 @@
 package br.com.vinicius.appcontrolevencimentos.view;
 
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
-import br.com.vinicius.appcontrolevencimentos.controller.CrudUsuario;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarUsuario;
+import br.com.vinicius.appcontrolevencimentos.controller.UsuarioDAO;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarUsuario;
+import br.com.vinicius.appcontrolevencimentos.model.Usuario;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -15,9 +16,10 @@ import java.sql.Connection;
  * @author FROTA01-PC
  */
 public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
-
-    PesquisarSetarUsuario pesquisar = new PesquisarSetarUsuario();
-    CrudUsuario crudUsuario = new CrudUsuario();
+    
+    PesquisarSetarUsuario pesquisarUsuario = new PesquisarSetarUsuario();
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    Usuario usuario = new Usuario();
     LimparCampos limpaCampos = new LimparCampos();
     Connection conexao = null;
 
@@ -27,7 +29,7 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
     public TelaCadastroUsuario() {
         initComponents();
     }
-
+    
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
@@ -250,12 +252,12 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     private void txtPesquisarUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisarUsuarioKeyReleased
         // TODO add your handling code here:
-        pesquisar.pesquisarUsuario();
+        pesquisarUsuario.pesquisarUsuario();
     }//GEN-LAST:event_txtPesquisarUsuarioKeyReleased
 
     private void tblCadastroUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCadastroUsuarioMouseClicked
         // TODO add your handling code here:
-        pesquisar.setarCampos();
+        pesquisarUsuario.setarCampos();
     }//GEN-LAST:event_tblCadastroUsuarioMouseClicked
 
     private void lblBotaoCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoCancelarMouseClicked
@@ -265,15 +267,24 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        pesquisar.pesquisarUsuario();
+        pesquisarUsuario.pesquisarUsuario();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
-        if(txtIdUsuario.getText().isEmpty()){
-            crudUsuario.cadastrarUsuario();   
-        }else{
-            crudUsuario.editarUsuario();
+        if (txtIdUsuario.getText().isEmpty()) {
+            usuario.setNome(txtUsuario.getText());
+            usuario.setSenha(txtSenha.getText());
+            usuario.setPerfil(pesquisarUsuario.retornarIdEmissor());
+            usuario.setAtivo(cboAtivo.getSelectedItem().toString());
+            usuarioDAO.cadastrarUsuario(usuario);            
+        } else {
+            usuario.setNome(txtUsuario.getText());
+            usuario.setSenha(txtSenha.getText());
+            usuario.setPerfil(pesquisarUsuario.retornarIdEmissor());
+            usuario.setAtivo(cboAtivo.getSelectedItem().toString());
+            usuario.setId(Integer.parseInt(txtIdUsuario.getText()));
+            usuarioDAO.editarUsuario(usuario);
         }
         
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
@@ -285,7 +296,8 @@ public class TelaCadastroUsuario extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        crudUsuario.excluirUsuario();
+        usuario.setId(Integer.parseInt(txtIdUsuario.getText()));
+        usuarioDAO.excluirUsuario(usuario);
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
 
 

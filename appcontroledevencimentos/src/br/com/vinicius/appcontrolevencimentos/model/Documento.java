@@ -12,7 +12,7 @@ public class Documento {
     
     private int id;
     private String nome;
-    private Emissor emissor;
+    private int emissor;
     private String ativo;
 
     public Documento() {
@@ -22,11 +22,15 @@ public class Documento {
         this.id = id;
     }
 
-    public Documento(int id, String nome, Emissor emissor, String ativo) {
+    public Documento(int id, String nome, int emissor, String ativo) {
         this.id = id;
         this.nome = nome;
         this.emissor = emissor;
         this.ativo = ativo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -41,11 +45,11 @@ public class Documento {
         this.nome = nome;
     }
 
-    public Emissor getEmissor() {
+    public int getEmissor() {
         return emissor;
     }
 
-    public void setEmissor(Emissor emissor) {
+    public void setEmissor(int emissor) {
         this.emissor = emissor;
     }
 

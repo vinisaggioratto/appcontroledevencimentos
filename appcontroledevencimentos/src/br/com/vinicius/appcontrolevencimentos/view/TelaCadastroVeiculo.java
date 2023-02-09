@@ -4,9 +4,10 @@
  */
 package br.com.vinicius.appcontrolevencimentos.view;
 
-import br.com.vinicius.appcontrolevencimentos.controller.CrudVeiculo;
+import br.com.vinicius.appcontrolevencimentos.controller.VeiculoDAO;
+import br.com.vinicius.appcontrolevencimentos.model.Veiculo;
 import br.com.vinicius.appcontrolevencimentos.utilities.LimparCampos;
-import br.com.vinicius.appcontrolevencimentos.controller.PesquisarSetarVeiculo;
+import br.com.vinicius.appcontrolevencimentos.search.PesquisarSetarVeiculo;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -17,7 +18,8 @@ import java.sql.Connection;
 public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
 
     PesquisarSetarVeiculo pesquisarVeiculo = new PesquisarSetarVeiculo();
-    CrudVeiculo crudVeiculo = new CrudVeiculo();
+    VeiculoDAO veiculoDAO = new VeiculoDAO();
+    Veiculo veiculo = new Veiculo();
     LimparCampos limparCampos = new LimparCampos();
     Connection conexao = null;
 
@@ -67,6 +69,23 @@ public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Cadastrar Veículo");
         setToolTipText("Cadastrar veículo");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -180,8 +199,6 @@ public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Tipo:");
 
-        cboTipoVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Utilitário", "Toco", "Truck", "Quarto Eixo", "Cavalo Mecânico", "Vanderléia", "Bi-trem", "Rodo-Trem" }));
-
         jLabel6.setText("Ativo:");
 
         cboAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
@@ -214,10 +231,9 @@ public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
                                     .addComponent(txtPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                                     .addComponent(txtModeloVeiculo)
                                     .addComponent(txtIdVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cboAtivo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cboBottom, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cboTipoVeiculo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(cboAtivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboBottom, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboTipoVeiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -284,12 +300,23 @@ public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
 
     private void lblBotaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoSalvarMouseClicked
         // TODO add your handling code here:
-        if(txtIdVeiculo.getText().isEmpty()){
-            crudVeiculo.cadastrarVeiculo();   
-        }else{
-            crudVeiculo.editarVeiculo();
+        if (txtIdVeiculo.getText().isEmpty()) {
+            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setModelo(txtModeloVeiculo.getText());
+            veiculo.setTipo(pesquisarVeiculo.retornarIdEmissor());
+            veiculo.setBottom(cboBottom.getSelectedItem().toString());
+            veiculo.setAtivo(cboAtivo.getSelectedItem().toString());
+            veiculoDAO.cadastrarVeiculo(veiculo);
+        } else {
+            veiculo.setPlaca(txtPlaca.getText());
+            veiculo.setModelo(txtModeloVeiculo.getText());
+            veiculo.setTipo(pesquisarVeiculo.retornarIdEmissor());
+            veiculo.setBottom(cboBottom.getSelectedItem().toString());
+            veiculo.setAtivo(cboAtivo.getSelectedItem().toString());
+            veiculo.setId(Integer.parseInt(txtIdVeiculo.getText()));
+            veiculoDAO.editarVeiculo(veiculo);
         }
-        
+
     }//GEN-LAST:event_lblBotaoSalvarMouseClicked
 
     private void lblBotaoNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoNovoMouseClicked
@@ -299,8 +326,14 @@ public class TelaCadastroVeiculo extends javax.swing.JInternalFrame {
 
     private void lblBotaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotaoExcluirMouseClicked
         // TODO add your handling code here:
-        crudVeiculo.excluirVeiculo();
+        veiculo.setId(Integer.parseInt(txtIdVeiculo.getText()));
+        veiculoDAO.excluirVeiculo(veiculo);
     }//GEN-LAST:event_lblBotaoExcluirMouseClicked
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        // TODO add your handling code here:
+        cboTipoVeiculo.removeAllItems();
+    }//GEN-LAST:event_formInternalFrameClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
