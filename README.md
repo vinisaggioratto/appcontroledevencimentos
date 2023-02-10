@@ -62,4 +62,5 @@ com o login/fechamento do sistema.
 - Alterado posicionamento inicial do form de alterar endereço e porta do servidor.
 - Criada classe Perfil.
 - Alterando classes para o padrão DAO.
+- Alterado select sql do MotoristaVeiculoDAO, puxando a data formatada direto do banco.
 

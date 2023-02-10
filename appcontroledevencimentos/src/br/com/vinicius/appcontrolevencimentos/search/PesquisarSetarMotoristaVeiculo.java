@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -28,9 +29,13 @@ public class PesquisarSetarMotoristaVeiculo {
     public void pesquisarMotoristaVeiculo() {
         conexao = ModuloConexao.conector();
 
-        String sql = "select mot.nome as Motorista, vei.placa as Placa, mv.data_inicial as 'Data Inicial', mv.data_final as 'Data Final', mv.ativo as Ativo " +
-" from motorista mot join motorista_veiculo mv on mv.motorista_id = mot.id " +
-"join veiculo vei on mv.veiculo_id = vei.id join usuario usu on mv.usuario_id = usu.id where mot.nome like ?";
+        String sql = "select mot.nome as Motorista, vei.placa as Placa, "
+                + "date_format(mv.data_inicial,'%d/%m/%Y') as 'Data Inicial', "
+                + "date_format(mv.data_final,'%d/%m/%Y') as 'Data Final', "
+                + "mv.ativo as Ativo from motorista mot join motorista_veiculo mv "
+                + "on mv.motorista_id = mot.id join veiculo vei on "
+                + "mv.veiculo_id = vei.id join usuario usu on mv.usuario_id = usu.id "
+                + "where mot.nome like ?";
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -39,7 +44,7 @@ public class PesquisarSetarMotoristaVeiculo {
             pst.setString(1, telaMotoristaVeiculo.txtPesquisarMotoristaVeiculo.getText() + "%");
             rs = pst.executeQuery();
             //a linha abaixo usa a biblioteca rs2xml.jar para preencher a tabela
-           
+
             telaMotoristaVeiculo.tblvincularMotoristaVeiculo.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (Exception e) {
@@ -49,13 +54,12 @@ public class PesquisarSetarMotoristaVeiculo {
 
     //MÉTODO PARA SETAR OS CAMPOS DO FORMULARIO COM O CONTEUDO DA TABELA
     public void setarMotoristaVeiculo() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        
-        
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
         int setar = telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getSelectedRow(); //a variavel recebe os valores da linha da tabela
         telaMotoristaVeiculo.cboMotorista.setSelectedItem(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 0).toString());
         telaMotoristaVeiculo.cboVeiculo.setSelectedItem(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 1).toString());
-        telaMotoristaVeiculo.ftxtDataInicial.setText(sdf.format(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 2)));
+        telaMotoristaVeiculo.ftxtDataInicial.setText(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 2).toString());
         telaMotoristaVeiculo.ftxtDataFinal.setText(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 3).toString());
         telaMotoristaVeiculo.cboAtivo.setSelectedItem(telaMotoristaVeiculo.tblvincularMotoristaVeiculo.getModel().getValueAt(setar, 4).toString());
 
